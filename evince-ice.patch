@@ -1,0 +1,12 @@
+diff -aurN evince-2.32.0.orig/configure.ac evince-2.32.0/configure.ac
+--- evince-2.32.0.orig/configure.ac	2012-03-19 17:31:31.294933022 +0100
++++ evince-2.32.0/configure.ac	2012-03-19 17:34:13.266908094 +0100
+@@ -225,7 +225,7 @@
+     *) SMCLIENT_PKGS="" ;;
+   esac
+ 
+-  PKG_CHECK_MODULES([SMCLIENT],[gtk+-$GTK_API_VERSION gthread-2.0 $SMCLIENT_PKGS])
++  PKG_CHECK_MODULES([SMCLIENT],[gtk+-$GTK_API_VERSION gthread-2.0 $SMCLIENT_PKGS ice])
+   AC_SUBST([SMCLIENT_CFLAGS])
+   AC_SUBST([SMCLIENT_LIBS])
+ fi

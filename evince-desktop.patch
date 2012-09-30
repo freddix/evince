@@ -1,0 +1,11 @@
+diff -aurN evince-2.26.1.orig/data/evince.desktop.in.in evince-2.26.1/data/evince.desktop.in.in
+--- evince-2.26.1.orig/data/evince.desktop.in.in	2009-04-16 15:30:56.000000000 +0200
++++ evince-2.26.1/data/evince.desktop.in.in	2009-04-16 15:31:21.000000000 +0200
+@@ -8,7 +8,6 @@
+ Terminal=false
+ Type=Application
+ Icon=evince
+-NoDisplay=true
+ X-GNOME-DocPath=
+ X-GNOME-Bugzilla-Bugzilla=GNOME
+ X-GNOME-Bugzilla-Product=evince
