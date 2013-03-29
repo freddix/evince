@@ -1,14 +1,13 @@
 Summary:	Document viewer for multiple document formats
 Name:		evince
-Version:	3.6.1
+Version:	3.8.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/sources/evince/3.6/evince-%{version}.tar.xz
-# Source0-md5:	e03d1158eeba2f5c693e1a1db58ed1ec
-Patch0:		evince-desktop.patch
-Patch1:		evince-correct-return.patch
-Patch2:		evince-lz.patch
+Source0:	http://ftp.gnome.org/pub/gnome/sources/evince/3.8/evince-%{version}.tar.xz
+# Source0-md5:	1f48bc498d1840c08fedb91b21687539
+Patch0:		evince-correct-return.patch
+Patch1:		evince-lz.patch
 URL:		http://www.gnome.org/projects/evince/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -82,7 +81,6 @@ Evince API documentation.
 %setup -qn evince-%{version}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 # kill gnome common deps
 sed -i -e 's/GNOME_COMPILE_WARNINGS.*//g'	\
@@ -188,7 +186,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libev*.so
-%{_libdir}/libev*.la
 %{_includedir}/evince
 %{_pkgconfigdir}/*.pc
 %{_datadir}/gir-1.0/*.gir
