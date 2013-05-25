@@ -1,11 +1,11 @@
 Summary:	Document viewer for multiple document formats
 Name:		evince
-Version:	3.8.0
+Version:	3.8.2
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evince/3.8/evince-%{version}.tar.xz
-# Source0-md5:	1f48bc498d1840c08fedb91b21687539
+# Source0-md5:	5792485f6cab925ebdf7ae7fd9d93028
 Patch0:		evince-correct-return.patch
 Patch1:		evince-lz.patch
 URL:		http://www.gnome.org/projects/evince/
@@ -163,12 +163,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evince/?/backends/*.so
 %{_libexecdir}/?/backends/*.evince-backend
 %{_datadir}/evince
+%{_datadir}/glib-2.0/schemas/org.gnome.Evince.gschema.xml
 %{_datadir}/thumbnailers/evince.thumbnailer
 %{_desktopdir}/*.desktop
 %{_iconsdir}/*/*/*/*
-
-%{_datadir}/GConf/gsettings/evince.convert
-%{_datadir}/glib-2.0/schemas/org.gnome.Evince.gschema.xml
 
 %if !%{with simple}
 %attr(755,root,root) %{_libdir}/evince/evinced
