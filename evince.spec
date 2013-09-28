@@ -1,11 +1,11 @@
 Summary:	Document viewer for multiple document formats
 Name:		evince
-Version:	3.8.3
+Version:	3.10.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/sources/evince/3.8/evince-%{version}.tar.xz
-# Source0-md5:	81a8b0ffc427f2e3bde4056286e3a27a
+Source0:	http://ftp.gnome.org/pub/gnome/sources/evince/3.10/evince-%{version}.tar.xz
+# Source0-md5:	155f458eb391d581aaa51582bc11965c
 Patch0:		evince-correct-return.patch
 Patch1:		evince-lz.patch
 URL:		http://www.gnome.org/projects/evince/
@@ -16,17 +16,17 @@ BuildRequires:	djvulibre-devel
 BuildRequires:	ghostscript
 BuildRequires:	gnome-doc-utils
 BuildRequires:	gnome-icon-theme-devel
-BuildRequires:	gobject-introspection-devel
+BuildRequires:	gobject-introspection-devel >= 1.38.0
 BuildRequires:	intltool
 #BuildRequires:	kpathsea-devel
-BuildRequires:	libgnome-keyring-devel
+BuildRequires:	libgnome-keyring-devel >= 3.10.0
 BuildRequires:	libspectre-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libxslt-progs
-BuildRequires:	nautilus-devel
+BuildRequires:	nautilus-devel >= 3.10.0
 BuildRequires:	pkg-config
-BuildRequires:	poppler-glib-devel
+BuildRequires:	poppler-glib-devel >= 0.24.0
 BuildRequires:	python-libxml2
 Requires:	%{name}-libs = %{version}-%{release}
 Requires(post,postun):	/usr/bin/gtk-update-icon-cache
