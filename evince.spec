@@ -1,11 +1,11 @@
 Summary:	Document viewer for multiple document formats
 Name:		evince
-Version:	3.10.3
+Version:	3.12.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/sources/evince/3.10/evince-%{version}.tar.xz
-# Source0-md5:	9eea10e75e032e489232f4f22bfc403a
+Source0:	http://ftp.gnome.org/pub/gnome/sources/evince/3.12/evince-%{version}.tar.xz
+# Source0-md5:	a74c78bb02713d43efa561179dc1cd1e
 Patch0:		evince-correct-return.patch
 Patch1:		evince-lz.patch
 URL:		http://www.gnome.org/projects/evince/
@@ -14,17 +14,16 @@ BuildRequires:	automake
 BuildRequires:	dbus-glib-devel
 BuildRequires:	djvulibre-devel
 BuildRequires:	ghostscript
-BuildRequires:	gnome-doc-utils
 BuildRequires:	gnome-icon-theme-devel
-BuildRequires:	gobject-introspection-devel >= 1.38.0
+BuildRequires:	gobject-introspection-devel >= 1.40.0
 BuildRequires:	intltool
 #BuildRequires:	kpathsea-devel
-BuildRequires:	libgnome-keyring-devel >= 3.10.0
+BuildRequires:	libgnome-keyring-devel >= 3.12.0
 BuildRequires:	libspectre-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libxslt-progs
-BuildRequires:	nautilus-devel >= 3.10.0
+BuildRequires:	nautilus-devel >= 3.12.0
 BuildRequires:	pkg-config
 BuildRequires:	poppler-glib-devel >= 0.24.0
 BuildRequires:	python-libxml2
@@ -83,7 +82,7 @@ Evince API documentation.
 %patch1 -p1
 
 # kill gnome common deps
-sed -i -e 's/GNOME_COMPILE_WARNINGS.*//g'	\
+%{__sed} -i -e 's/GNOME_COMPILE_WARNINGS.*//g'	\
     -i -e 's/GNOME_MAINTAINER_MODE_DEFINES//g'	\
     -i -e 's/GNOME_COMMON_INIT//g'		\
     -i -e 's/GNOME_CXX_WARNINGS.*//g'		\
@@ -92,7 +91,6 @@ sed -i -e 's/GNOME_COMPILE_WARNINGS.*//g'	\
 
 %build
 %{__gtkdocize}
-%{__gnome_doc_prepare}
 %{__libtoolize}
 %{__intltoolize}
 %{__aclocal}
@@ -102,7 +100,6 @@ sed -i -e 's/GNOME_COMPILE_WARNINGS.*//g'	\
 %configure \
 	--disable-comics		\
 	--disable-schemas-compile	\
-	--disable-scrollkeeper		\
 	--disable-silent-rules		\
 	--disable-static		\
 	--enable-djvu			\
@@ -123,8 +120,10 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/evince/?/backends/*.la
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,en@shaw,ks,ps}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/evince/?/backends/*.la
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,en@shaw,ks,ps}
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/GConf
 
 %if %{with simple}
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.{la,so}
@@ -133,18 +132,18 @@ rm -rf $RPM_BUILD_ROOT{%{_includedir},%{_gtkdocdir},%{_pkgconfigdir},%{_datadir}
 rm -rf $RPM_BUILD_ROOT%{_libdir}/nautilus/extensions-3.0/*.la
 %endif
 
-%find_lang evince --with-gnome --with-omf
+%find_lang evince --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%update_desktop_database_post
+%update_desktop_database
 %update_icon_cache hicolor
 %update_gsettings_cache
 
 %postun
-%update_desktop_database_postun
+%update_desktop_database
 %update_icon_cache hicolor
 %update_gsettings_cache
 
