@@ -1,29 +1,29 @@
+# TODO: package browser plugin
 Summary:	Document viewer for multiple document formats
 Name:		evince
-Version:	3.12.1
+Version:	3.14.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/sources/evince/3.12/evince-%{version}.tar.xz
-# Source0-md5:	7bd3defee6d3766517a0e6611003f6ca
+Source0:	http://ftp.gnome.org/pub/gnome/sources/evince/3.14/evince-%{version}.tar.xz
+# Source0-md5:	feaf7382d4829a8ea52bfbaae106b9da
 Patch0:		evince-correct-return.patch
 Patch1:		evince-lz.patch
 URL:		http://www.gnome.org/projects/evince/
+BuildRequires:	adwaita-icon-theme-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel
 BuildRequires:	djvulibre-devel
 BuildRequires:	ghostscript
-BuildRequires:	gnome-icon-theme-devel
-BuildRequires:	gobject-introspection-devel >= 1.40.0
+BuildRequires:	gobject-introspection-devel >= 1.42.0
 BuildRequires:	intltool
-#BuildRequires:	kpathsea-devel
 BuildRequires:	libgnome-keyring-devel >= 3.12.0
 BuildRequires:	libspectre-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libxslt-progs
-BuildRequires:	nautilus-devel >= 3.12.0
+BuildRequires:	nautilus-devel >= 3.14.0
 BuildRequires:	pkg-config
 BuildRequires:	poppler-glib-devel >= 0.24.0
 BuildRequires:	python-libxml2
@@ -33,7 +33,6 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	glib-gio-gsettings
 Requires(post,postun):	hicolor-icon-theme
 Requires:	xdg-icon-theme
-Obsoletes:	evince2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libexecdir	%{_libdir}/evince
