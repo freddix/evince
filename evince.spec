@@ -1,12 +1,11 @@
-# TODO: package browser plugin
 Summary:	Document viewer for multiple document formats
 Name:		evince
-Version:	3.14.0
+Version:	3.14.1
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evince/3.14/evince-%{version}.tar.xz
-# Source0-md5:	feaf7382d4829a8ea52bfbaae106b9da
+# Source0-md5:	20575f13ce1a0bf31f085d2430848c40
 Patch0:		evince-correct-return.patch
 Patch1:		evince-lz.patch
 URL:		http://www.gnome.org/projects/evince/
@@ -58,6 +57,14 @@ Requires:	%{name}-libs = %{version}-%{release}
 %description devel
 Header files for evbackend library.
 
+%package -n browser-plugin-evince
+Summary:	Web browser plugin
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
+
+%description -n browser-plugin-evince
+Web browser plugin embedding Evince documents.
+
 %package -n nautilus-extension-evince
 Summary:	Evince extension for Nautilus
 Group:		X11/Applications
@@ -97,6 +104,7 @@ Evince API documentation.
 %{__autoheader}
 %{__automake}
 %configure \
+	BROWSER_PLUGIN_DIR=%{_libdir}/browser-plugins	\
 	--disable-comics		\
 	--disable-schemas-compile	\
 	--disable-silent-rules		\
@@ -119,17 +127,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/evince/?/backends/*.la
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,en@shaw,ks,ps}
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/GConf
-
-%if %{with simple}
-rm -f $RPM_BUILD_ROOT%{_libdir}/*.{la,so}
-rm -rf $RPM_BUILD_ROOT{%{_includedir},%{_gtkdocdir},%{_pkgconfigdir},%{_datadir}/{gnome,omf}}
-%else
-rm -rf $RPM_BUILD_ROOT%{_libdir}/nautilus/extensions-3.0/*.la
-%endif
+find $RPM_BUILD_ROOT -name "*.la" -exec rm -f {} \;
 
 %find_lang evince --with-gnome
 
@@ -189,6 +188,10 @@ rm -rf $RPM_BUILD_ROOT
 %files -n nautilus-extension-evince
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/nautilus/extensions-3.0/*.so*
+
+%files -n browser-plugin-evince
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/browser-plugins/libevbrowserplugin.so
 
 %files apidocs
 %defattr(644,root,root,755)
